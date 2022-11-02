@@ -1,4 +1,4 @@
-name:Deploy to pages
+name: Deploy to pages
 on: [push]
 permissions:
   contents: write
