@@ -1,10 +1,17 @@
 name: Deploy to pages
-on: [push]
+on:
+  pull_request:
+    branches: [ main ]
 permissions:
   contents: write
 jobs:
   build-and-deploy:
+  
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
       - name: Build & Deploy
         run: npm run deploy
