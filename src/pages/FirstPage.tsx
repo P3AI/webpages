@@ -5,7 +5,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import cipraLogo from '../res/cipra_logo.png'
 import {useState} from "react";
-import {FormData} from "../FormData";
+import {DEBUG_MODE, FormData} from "../FormData";
 
 const termAgreement: string = `Agreement
 1. ACSACSACSACSACS ACSACSACSACS ACSACS ACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACS
@@ -16,10 +16,10 @@ A fdfdfd`
 
 export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
-    const [emailValue, setEmailValue] = useState<string>('')
-    const [phoneValue, setPhoneValue] = useState('')
-    const [passwordValue, setPasswordValue] = useState<string>('')
-    const [confirmedPasswordValue, setConfirmedPasswordValue] = useState<string>('')
+    const [emailValue, setEmailValue] = useState<string>(FormData.instance.email)
+    const [phoneValue, setPhoneValue] = useState(FormData.instance.cell)
+    const [passwordValue, setPasswordValue] = useState<string>(FormData.instance.password)
+    const [confirmedPasswordValue, setConfirmedPasswordValue] = useState<string>(FormData.instance.password)
     const [policyCheckedValue, setPolicyCheckedValue] = useState<boolean>(false)
 
     const [emailFormatValid, setEmailFormatValid] = useState<boolean>(true)
@@ -40,7 +40,7 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
         setPasswordConfirmValid(checkPasswordConfirmValid)
         setTermAgreed(checkedTermAgreed)
 
-        if(true || checkEmailFormatValid && checkPasswordConfirmValid && checkedTermAgreed) {
+        if(DEBUG_MODE || (checkEmailFormatValid && checkPasswordConfirmValid && checkedTermAgreed)) {
             FormData.instance.email = emailValue
             FormData.instance.cell = phoneValue
             FormData.instance.password = passwordValue
@@ -50,7 +50,7 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
 
     return <div className="glow-border page-container" style={{width: "330px"}}>
         <SpaceBetween size='xs' direction='vertical'>
-            <img src={cipraLogo} alt='cipra logo' width='90%'/>
+            <img src={cipraLogo} alt='cipra logo' width='90%' className='line-align-center'/>
             <h2>Create an account</h2>
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Email</div>
@@ -120,9 +120,11 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
             {
                 !termAgreed && <p className='tip-text'>You must agree with the Terms of Service.</p>
             }
-            <Button variant='primary' className='text-align-center' onClick={submit}>
-                Join BP Guidance
-            </Button>
+            <div className='line-align-center'>
+                <Button variant='primary' onClick={submit}>
+                    Join BP Guidance
+                </Button>
+            </div>
         </SpaceBetween>
     </div>
 }

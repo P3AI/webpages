@@ -1,5 +1,5 @@
 import {PagesEnum} from "../App";
-import {Button, Checkbox, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
+import {Button, Checkbox, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {CheckboxGroup, CheckboxItem} from "../components/CheckboxGroup";
 import {useState} from "react";
 
@@ -65,7 +65,7 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Do you own and actively use an Apple Watch or Fitbit?</div>
                 </SpaceBetween>
-                <Checkbox checked={selectAppleWatchModel} onChange={({detail}) => setSelectAppleWatchModel(detail.checked)}>Apple</Checkbox>
+                <Checkbox checked={selectAppleWatchModel} onChange={({detail}) => setSelectAppleWatchModel(detail.checked)}>Apple Watch</Checkbox>
                 {
                     selectAppleWatchModel &&
                     <SpaceBetween size='s' direction='vertical' className='item-indent'>
@@ -101,9 +101,9 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                 <CheckboxGroup content={bloodPressureMonitor} setContent={setBloodPressureMonitor} />
             </SpaceBetween>
 
-            <div className='text-align-center'>
+            <div className='line-align-center'>
                 <Button className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.Second)}}>Back</Button>
-                <Button variant='primary' className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.Success)}}>Next</Button>
+                <Button variant='primary' className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.Success)}}>Submit</Button>
             </div>
         </SpaceBetween>
     </div>
