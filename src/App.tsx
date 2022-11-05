@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {FirstPage} from "./pages/FirstPage";
 import {SecondPage} from "./pages/SecondPage";

@@ -2,24 +2,18 @@ import {PagesEnum} from "../App";
 import {Button, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
 import {CheckboxGroup, CheckboxItem} from "../components/CheckboxGroup";
-
-const initPreexistingConditions: CheckboxItem[] = [
-    {key: 'Diabetes', text: 'Diabetes', checked: false},
-    {key: 'Hypertension', text: 'Hypertension', checked: false},
-    {key: 'LiverDisease', text: 'Liver Disease', checked: false},
-    {key: 'LungDisease', text: 'Lung Disease', checked: false}
-]
+import {FormData} from "../FormData";
 
 export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [genderValue, setGenderValue] = useState('')
-    const [ageValue, setAgeValue] = useState<string>('')
-    const [heightFeetValue, setHeightFeetValue] = useState<string>('')
-    const [heightInchesValue, setHeightInchesValue] = useState<string>('')
-    const [zipCodeValue, setZipCodeValue] = useState<string>('')
-    const [preexistingConditionsValue, setPreexistingConditionsValue] = useState<CheckboxItem[]>(initPreexistingConditions)
+    const [firstName, setFirstName] = useState(FormData.instance.firstName)
+    const [lastName, setLastName] = useState(FormData.instance.lastName)
+    const [genderValue, setGenderValue] = useState(FormData.instance.gender)
+    const [ageValue, setAgeValue] = useState<string>(FormData.instance.age)
+    const [heightFeetValue, setHeightFeetValue] = useState<string>(FormData.instance.heightFeet)
+    const [heightInchesValue, setHeightInchesValue] = useState<string>(FormData.instance.heightInches)
+    const [zipCodeValue, setZipCodeValue] = useState<string>(FormData.instance.zipCode)
+    const [preexistingConditionsValue, setPreexistingConditionsValue] = useState<CheckboxItem[]>(FormData.instance.preexistingCondition)
 
     return <div className='glow-border page-container page-width-constrain'>
         <SpaceBetween size='xl' direction='vertical'>
@@ -29,11 +23,17 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                     <div>Name</div>
                 </SpaceBetween>
                 <SpaceBetween size='m' direction='horizontal'>
-                    <Input onChange={({detail}) => setFirstName(detail.value)}
+                    <Input onChange={({detail}) => {
+                                setFirstName(detail.value)
+                                FormData.instance.firstName = detail.value
+                            }}
                            value={firstName}
                            placeholder="First Name"
                     ></Input>
-                    <Input onChange={({detail}) => setLastName(detail.value)}
+                    <Input onChange={({detail}) => {
+                                setLastName(detail.value)
+                                FormData.instance.lastName = detail.value
+                            }}
                            value={lastName}
                            placeholder="Last Name"
                     ></Input>
@@ -106,7 +106,6 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                 <Input
                     onChange={({ detail }) => setZipCodeValue(detail.value)}
                     value={zipCodeValue}
-                    type="number"
                 />
             </SpaceBetween>
 
@@ -117,7 +116,7 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                 <CheckboxGroup content={preexistingConditionsValue} setContent={setPreexistingConditionsValue}></CheckboxGroup>
             </SpaceBetween>
 
-            <div className='text-align-center'>
+            <div className='line-align-center'>
                 <Button className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.First)}}>Back</Button>
                 <Button variant='primary' className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.Third)}}>Next</Button>
             </div>
