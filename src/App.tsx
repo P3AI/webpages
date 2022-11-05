@@ -1,24 +1,43 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {FirstPage} from "./pages/FirstPage";
+import {SecondPage} from "./pages/SecondPage";
+import {ThirdPage} from "./pages/ThirdPage";
+import {SuccessPage} from "./pages/SuccessPage";
+
+export enum PagesEnum {
+  First,
+  Second,
+  Third,
+  Success
+}
 
 function App() {
+
+  const [showPage, setShowPage] = useState<PagesEnum>(PagesEnum.First);
+  const [showPageContent, setShowPageContent] = useState<JSX.Element>(<div/>);
+
+  useEffect(() => {
+    const getShowPage = (pageEnum: PagesEnum): JSX.Element => {
+      switch (pageEnum){
+        case PagesEnum.First:
+          return <FirstPage trigger={setShowPage}></FirstPage>
+        case PagesEnum.Second:
+          return <SecondPage trigger={setShowPage}></SecondPage>
+        case PagesEnum.Third:
+          return <ThirdPage trigger={setShowPage}></ThirdPage>
+        case PagesEnum.Success:
+          return <SuccessPage></SuccessPage>
+      }
+      return <div></div>
+    }
+    setShowPageContent(getShowPage(showPage))
+  }, [showPage])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App center-screen">
+      {showPageContent}
     </div>
   );
 }

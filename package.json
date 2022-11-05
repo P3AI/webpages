@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://p3ai.github.io/webpages",
   "dependencies": {
+    "@cloudscape-design/components": "^3.0.99",
+    "@cloudscape-design/global-styles": "^1.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,11 +13,12 @@
     "@types/node": "^16.18.3",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "eslint": "8.22.0",
     "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-phone-input-2": "^2.15.1",
     "react-scripts": "5.0.1",
-    "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -43,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.42.0",
+    "typescript": "^4.8.4"
   }
 }

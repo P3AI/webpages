@@ -1,0 +1,42 @@
+.glow-border {
+    border-radius: 15px;
+    border-bottom: 1px solid lightgrey;
+    box-shadow: 0 0 10px lightgrey;
+    padding: 25px;
+}
+
+.page-container {
+    margin: 50px;
+}
+
+.page-width-constrain {
+    max-width: 400px;
+}
+
+.tip-text {
+    color: red;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.number-input-size {
+    width: 100px;
+}
+
+.line-items-padding {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.item-indent {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid black;
+}
