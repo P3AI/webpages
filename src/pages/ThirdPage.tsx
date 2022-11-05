@@ -3,6 +3,11 @@ import {Button, Checkbox, RadioGroup, SpaceBetween} from "@cloudscape-design/com
 import {CheckboxGroup, CheckboxItem} from "../components/CheckboxGroup";
 import {useState} from "react";
 
+const initPhoneType: CheckboxItem[] = [
+    {key: 'android', text: 'Android', checked: false},
+    {key: 'iphone', text: 'Apple', checked: false}
+]
+
 const initBloodPressureMonitorList: CheckboxItem[] = [
     {key: 'omron', text: 'Omron', checked: false},
     {key: 'ihealth', text: 'iHealth', checked: false}
@@ -35,6 +40,8 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
 
     const [takeBloodPressureMedicationValue, setTakeBloodPressureMedicationValue] = useState<string>('no')
 
+    const [phoneModel, setPhoneModel] = useState<CheckboxItem[]>(initPhoneType)
+
     const [selectAppleWatchModel, setSelectAppleWatchModel] = useState(false)
     const [selectFitbitModel, setSelectFitbitModel] = useState(false)
 
@@ -45,7 +52,7 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
 
     return <div className='glow-border page-container page-width-constrain'>
         <SpaceBetween size='xl' direction='vertical'>
-            <h2>Questionnaire (2/2)</h2>
+            <h2 className='line-align-center'>Questionnaire (2/2)</h2>
 
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
@@ -59,6 +66,13 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                         { value: "no", label: "No" }
                     ]}
                 />
+            </SpaceBetween>
+
+            <SpaceBetween size='s' direction='vertical'>
+                <SpaceBetween size='m' direction='horizontal'>
+                    <div>Do you have an Apple or Android phone?</div>
+                </SpaceBetween>
+                <CheckboxGroup content={phoneModel} setContent={setPhoneModel} />
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
@@ -85,13 +99,6 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                         <CheckboxGroup content={fitbitModelList} setContent={setFitbitModelList}/>
                     </SpaceBetween>
                 }
-            </SpaceBetween>
-
-            <SpaceBetween size='s' direction='vertical'>
-                <SpaceBetween size='m' direction='horizontal'>
-                    <div>Do you own and actively use a Bluetooth-enabled Omron or iHealth blood pressure monitor?</div>
-                </SpaceBetween>
-                <CheckboxGroup content={bloodPressureMonitor} setContent={setBloodPressureMonitor} />
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>

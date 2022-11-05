@@ -17,7 +17,7 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
 
     return <div className='glow-border page-container page-width-constrain'>
         <SpaceBetween size='xl' direction='vertical'>
-            <h2>Questionnaire (1/2)</h2>
+            <h2 className='line-align-center'>Questionnaire (1/2)</h2>
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Name</div>
