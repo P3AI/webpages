@@ -12,6 +12,7 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
     const [ageValue, setAgeValue] = useState<string>(FormData.instance.age)
     const [heightFeetValue, setHeightFeetValue] = useState<string>(FormData.instance.heightFeet)
     const [heightInchesValue, setHeightInchesValue] = useState<string>(FormData.instance.heightInches)
+    const [weightValue, setWeightValue] = useState<string>(FormData.instance.weight)
     const [zipCodeValue, setZipCodeValue] = useState<string>(FormData.instance.zipCode)
     const [preexistingConditionsValue, setPreexistingConditionsValue] = useState<CheckboxItem[]>(FormData.instance.preexistingCondition)
 
@@ -77,6 +78,7 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                 }
             </SpaceBetween>
 
+            {/*age*/}
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Please select your age (0-100)</div>
@@ -99,6 +101,7 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                 }
             </SpaceBetween>
 
+            {/*height*/}
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Please select your height</div>
@@ -137,6 +140,33 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                 }
             </SpaceBetween>
 
+            {/*weight*/}
+            <SpaceBetween size='s' direction='vertical'>
+                <SpaceBetween size='m' direction='horizontal'>
+                    <div>Please select your weight</div>
+                </SpaceBetween>
+                <SpaceBetween size='m' direction='horizontal'>
+                    <Input
+                        onChange={({ detail }) => {
+                            if(isNaN(Number(detail.value))) return
+                            const ageNum: number = Number(detail.value)
+                            if(ageNum>=0 && ageNum<=400) {
+                                setWeightValue(detail.value)
+                                FormData.instance.weight = detail.value
+                            }
+                        }}
+                        value={weightValue}
+                        type="number"
+                        placeholder='LB'
+                    />
+                </SpaceBetween>
+                {
+                    !(firstLoaded || weightValue.length > 0) &&
+                    <p className='tip-text'>Please enter your weight.</p>
+                }
+            </SpaceBetween>
+
+            {/*zip code*/}
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Please enter your zip code</div>
