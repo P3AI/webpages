@@ -7,6 +7,13 @@ export interface CheckboxItem {
     checked: boolean;
 }
 
+export function CheckboxGroupIsEmpty(items: CheckboxItem[]): boolean {
+    for(const item of items) {
+        if(item.checked) return false
+    }
+    return true
+}
+
 export function CheckboxGroup(props: {content: CheckboxItem[], setContent: (content: CheckboxItem[]) => void}): JSX.Element {
 
     const [contentValue, setContentValue] = useState<CheckboxItem[]>(props.content)
@@ -20,6 +27,7 @@ export function CheckboxGroup(props: {content: CheckboxItem[], setContent: (cont
                                       props.setContent(props.content)
                                       setContentValue([...contentValue])
                                   }}
+                                  key={item.key}
                 >
                     {item.text}
                 </Checkbox>
