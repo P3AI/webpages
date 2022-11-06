@@ -51,7 +51,7 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
     return <div className="glow-border page-container" style={{width: "330px"}}>
         <SpaceBetween size='xs' direction='vertical'>
             <img src={cipraLogo} alt='cipra logo' width='90%' className='line-align-center'/>
-            <h2>Create an account</h2>
+            <h2 className='line-align-center'>Create an account</h2>
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Email</div>
             </SpaceBetween>

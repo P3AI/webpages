@@ -1,8 +1,8 @@
 import {PagesEnum} from "../App";
 import {Button, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
-import {CheckboxGroup, CheckboxItem} from "../components/CheckboxGroup";
-import {FormData} from "../FormData";
+import {CheckboxGroup, CheckboxGroupIsEmpty, CheckboxItem} from "../components/CheckboxGroup";
+import {DEBUG_MODE, FormData} from "../FormData";
 
 export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
@@ -15,9 +15,22 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
     const [zipCodeValue, setZipCodeValue] = useState<string>(FormData.instance.zipCode)
     const [preexistingConditionsValue, setPreexistingConditionsValue] = useState<CheckboxItem[]>(FormData.instance.preexistingCondition)
 
+    const [firstLoaded, setFirstLoaded] = useState<boolean>(true)
+
+    function submit(): void {
+        setFirstLoaded(false)
+        if(DEBUG_MODE || (firstName.length > 0 && lastName.length > 0 && genderValue.length > 0 && ageValue.length > 0
+            && heightFeetValue.length > 0 && heightInchesValue.length > 0 && zipCodeValue.length > 0 && !CheckboxGroupIsEmpty(preexistingConditionsValue)))
+        {
+            props.trigger(PagesEnum.Third)
+        }
+    }
+
     return <div className='glow-border page-container page-width-constrain'>
         <SpaceBetween size='xl' direction='vertical'>
-            <h2>Questionnaire (1/2)</h2>
+
+            <h2 className='line-align-center'>Create an account</h2>
+
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Name</div>
@@ -38,6 +51,9 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                            placeholder="Last Name"
                     ></Input>
                 </SpaceBetween>
+                {
+                    !(firstLoaded || (firstName.length > 0 && lastName.length > 0)) && <p className='tip-text'>Please enter your full name.</p>
+                }
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
@@ -45,7 +61,10 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                     <div>What is your Gender?</div>
                 </SpaceBetween>
                 <RadioGroup
-                    onChange={({ detail }) => setGenderValue(detail.value)}
+                    onChange={({ detail }) => {
+                        setGenderValue(detail.value)
+                        FormData.instance.gender = detail.value
+                    }}
                     value={genderValue}
                     items={[
                         { value: "male", label: "Male" },
@@ -53,6 +72,9 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                         { value: "preferNotToSay", label: "Prefer not to say" }
                     ]}
                 />
+                {
+                    !(firstLoaded || genderValue.length > 0) && <p className='tip-text'>Please select your gender.</p>
+                }
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
@@ -63,12 +85,18 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                     onChange={({ detail }) => {
                         if(isNaN(Number(detail.value))) return
                         const ageNum: number = Number(detail.value)
-                        if(ageNum>=0 && ageNum<=100) setAgeValue(detail.value)
+                        if(ageNum>=0 && ageNum<=100) {
+                            setAgeValue(detail.value)
+                            FormData.instance.age = detail.value
+                        }
                     }}
                     value={ageValue}
                     type="number"
                     placeholder='Age'
                 />
+                {
+                    !(firstLoaded || ageValue.length > 0) && <p className='tip-text'>Please enter your age.</p>
+                }
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
@@ -80,7 +108,10 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                         onChange={({ detail }) => {
                             if(isNaN(Number(detail.value))) return
                             const ageNum: number = Number(detail.value)
-                            if(ageNum>=0 && ageNum<=7) setHeightFeetValue(detail.value)
+                            if(ageNum>=0 && ageNum<=7) {
+                                setHeightFeetValue(detail.value)
+                                FormData.instance.heightFeet = detail.value
+                            }
                         }}
                         value={heightFeetValue}
                         type="number"
@@ -90,13 +121,20 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                         onChange={({ detail }) => {
                             if(isNaN(Number(detail.value))) return
                             const ageNum: number = Number(detail.value)
-                            if(ageNum>=0 && ageNum<=11) setHeightInchesValue(detail.value)
+                            if(ageNum>=0 && ageNum<=11) {
+                                setHeightInchesValue(detail.value)
+                                FormData.instance.heightInches = detail.value
+                            }
                         }}
                         value={heightInchesValue}
                         type="number"
                         placeholder='Inches'
                     />
                 </SpaceBetween>
+                {
+                    !(firstLoaded || (heightFeetValue.length > 0 && heightInchesValue.length > 0)) &&
+                    <p className='tip-text'>Please enter your height.</p>
+                }
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
@@ -104,21 +142,35 @@ export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }):
                     <div>Please enter your zip code</div>
                 </SpaceBetween>
                 <Input
-                    onChange={({ detail }) => setZipCodeValue(detail.value)}
+                    onChange={({ detail }) => {
+                        setZipCodeValue(detail.value)
+                        FormData.instance.zipCode = detail.value
+                    }}
                     value={zipCodeValue}
                 />
+                {
+                    !(firstLoaded || zipCodeValue.length > 0) && <p className='tip-text'>Please enter your zip code.</p>
+                }
             </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
                     <div>Please select any preexisting conditions you have</div>
                 </SpaceBetween>
-                <CheckboxGroup content={preexistingConditionsValue} setContent={setPreexistingConditionsValue}></CheckboxGroup>
+                <CheckboxGroup content={preexistingConditionsValue} setContent={
+                    (items: CheckboxItem[]) => {
+                        setPreexistingConditionsValue(items)
+                        FormData.instance.preexistingCondition = items
+                    }
+                }></CheckboxGroup>
+                {
+                    !(firstLoaded || !CheckboxGroupIsEmpty(preexistingConditionsValue)) && <p className='tip-text'>Please select preexisting conditions.</p>
+                }
             </SpaceBetween>
 
             <div className='line-align-center'>
                 <Button className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.First)}}>Back</Button>
-                <Button variant='primary' className='line-items-padding' onClick={()=>{props.trigger(PagesEnum.Third)}}>Next</Button>
+                <Button variant='primary' className='line-items-padding' onClick={submit}>Next</Button>
             </div>
         </SpaceBetween>
     </div>
