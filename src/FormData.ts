@@ -1,6 +1,9 @@
 import {CheckboxItem} from "./components/CheckboxGroup";
+// import axios from "axios";
 
 export const DEBUG_MODE = false
+
+export const ENDPOINT = 'http://132.239.135.195:5000/newaccount'
 
 export const initPreexistingConditions: CheckboxItem[] = [
     {key: 'Diabetes', text: 'Diabetes', checked: false},
@@ -8,34 +11,6 @@ export const initPreexistingConditions: CheckboxItem[] = [
     {key: 'LiverDisease', text: 'Liver Disease', checked: false},
     {key: 'LungDisease', text: 'Lung Disease', checked: false},
     {key: 'NoneOfAbove', text: 'None of above', checked: false}
-]
-
-const initBloodPressureMonitorList: CheckboxItem[] = [
-    {key: 'omron', text: 'Omron', checked: false},
-    {key: 'ihealth', text: 'iHealth', checked: false}
-]
-
-const initAppleWatchModelList: CheckboxItem[] = [
-    {key: 'series7', text: 'Series 7', checked: false},
-    {key: 'series6', text: 'Series 6', checked: false},
-    {key: 'seriesSE', text: 'Series SE', checked: false},
-    {key: 'series5', text: 'Series 5', checked: false},
-    {key: 'series4', text: 'Series 4', checked: false},
-    {key: 'series3-', text: 'Series 3 and below', checked: false}
-]
-
-const initFitbitModelList: CheckboxItem[] = [
-    {key: 'inspire2', text: 'Inspire 2', checked: false},
-    {key: 'inspire3', text: 'Inspire 3', checked: false},
-    {key: 'charge4', text: 'Charge 4', checked: false},
-    {key: 'charge5', text: 'Charge 5', checked: false},
-    {key: 'sense', text: 'Sense', checked: false},
-    {key: 'sense2', text: 'Sense 2', checked: false},
-    {key: 'versa2', text: 'Versa 2', checked: false},
-    {key: 'versa3', text: 'Versa 3', checked: false},
-    {key: 'versa4', text: 'Versa 4', checked: false},
-    {key: 'luxe', text: 'Luxe', checked: false},
-    {key: 'other', text: 'Other', checked: false}
 ]
 
 export class FormData {
@@ -58,7 +33,47 @@ export class FormData {
 
     bloodPressureMedication: string = '';
     phoneType: string = '';
-    appleWatchModels: CheckboxItem[] = initAppleWatchModelList;
-    fitbitModels: CheckboxItem[] = initFitbitModelList;
-    bloodPressureMonitor: CheckboxItem[] = initBloodPressureMonitorList;
+    deviceType: string = '';
+    deviceModel: string = '';
+    bloodPressureMonitor: string = '';
+
+    submit(callbackSuccess: () => void, callbackFail: () => void): void {
+        const submitData = {
+            first_name: this.firstName,
+            last_name: this.lastName,
+            cell: '+' + this.cell,
+            email: this.email,
+            medication: this.bloodPressureMedication,
+            os: this.phoneType,
+            device: this.deviceType,
+            device_model: this.deviceModel,
+            bp_cuff: this.bloodPressureMonitor,
+            age: this.age,
+            gender: this.gender,
+            height: String(Number(this.heightFeet) * 12 + Number(this.heightInches)),
+            weight: this.weight,
+            'zip code': this.zipCode,
+            conditions: this.preexistingCondition.filter(item => item.checked).map(item => item.key).join(' || ')
+        }
+        console.log(submitData)
+        fetch(ENDPOINT, {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(submitData)
+        })
+            .then(response => {
+                console.log(response)
+                callbackSuccess()
+            })
+            .catch(e => {
+                console.log('Network Issue: ' + e)
+                callbackFail()
+            })
+        //axios.post(ENDPOINT, JSON.stringify(submitData))
+        //    .then(callbackSuccess)
+        //    .catch(callbackFail)
+    }
 }
