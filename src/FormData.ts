@@ -3,7 +3,7 @@ import {CheckboxItem} from "./components/CheckboxGroup";
 
 export const DEBUG_MODE = false
 
-export const ENDPOINT = 'http://132.239.135.195:5000/newaccount'
+export const ENDPOINT = 'https://mesdata.ucsd.edu:5001/newaccount'
 
 export const initPreexistingConditions: CheckboxItem[] = [
     {key: 'Diabetes', text: 'Diabetes', checked: false},
@@ -57,7 +57,6 @@ export class FormData {
         }
         console.log(submitData)
         fetch(ENDPOINT, {
-            mode: 'cors',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
