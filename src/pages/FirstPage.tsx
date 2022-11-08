@@ -87,6 +87,7 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                 }}
                 placeholder="Cellphone number"
             />
+
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Password</div>
             </SpaceBetween>
@@ -98,6 +99,7 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
             {
                 !passwordNotEmptyValid && <p className='tip-text'>Password cannot be empty.</p>
             }
+
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Confirmed Password</div>
             </SpaceBetween>
@@ -109,17 +111,22 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
             {
                 !passwordConfirmValid && <p className='tip-text'>Password not the same.</p>
             }
+
+            <SpaceBetween size='m' direction='horizontal'>
+                <div>Terms of Service</div>
+            </SpaceBetween>
             <Textarea
                 value={termAgreement}
                 readOnly
             />
             <Checkbox onChange={({detail}) => setPolicyCheckedValue(detail.checked)}
                       checked={policyCheckedValue}>
-                I have read and agree to the Terms of Service.
+                I have read and agree to the Terms of Service. Please also read the <a href={'https://www.cipra.ai/privacy-policy'} target={'_blank'}>Privacy Policy</a>.
             </Checkbox>
             {
                 !termAgreed && <p className='tip-text'>You must agree with the Terms of Service.</p>
             }
+
             <div className='line-align-center'>
                 <Button variant='primary' onClick={submit}>
                     Join BP Guidance
