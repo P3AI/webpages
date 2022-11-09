@@ -6,13 +6,9 @@ import 'react-phone-input-2/lib/style.css'
 import cipraLogo from '../res/cipra_logo.png'
 import {useState} from "react";
 import {DEBUG_MODE, FormData} from "../FormData";
+import {terms} from "../res/terms";
 
-const termAgreement: string = `Agreement
-1. ACSACSACSACSACS ACSACSACSACS ACSACS ACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACSACS
-2. sdsdssdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds sdsds 
-3. dsdsds
-
-A fdfdfd`
+const termAgreement: JSX.Element = terms
 
 export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
@@ -115,13 +111,17 @@ export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Terms of Service</div>
             </SpaceBetween>
-            <Textarea
-                value={termAgreement}
-                readOnly
-            />
+            <div style={{
+                height: '150px',
+                overflow: 'auto',
+                borderRadius: '8px',
+                border: '2px solid #9ba7b6'
+            }}>
+                {termAgreement}
+            </div>
             <Checkbox onChange={({detail}) => setPolicyCheckedValue(detail.checked)}
                       checked={policyCheckedValue}>
-                I have read and agree to the Terms of Service. Please also read the <a href={'https://www.cipra.ai/privacy-policy'} target={'_blank'}>Privacy Policy</a>.
+                I have read and agree to the Terms and Conditions, including the <a href={'https://www.cipra.ai/privacy-policy'} target={'_blank'} rel="noreferrer">Privacy Policy</a>.
             </Checkbox>
             {
                 !termAgreed && <p className='tip-text'>You must agree with the Terms of Service.</p>

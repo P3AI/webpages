@@ -41,6 +41,7 @@ export class FormData {
         const submitData = {
             first_name: this.firstName,
             last_name: this.lastName,
+            password: this.password,
             cell: '+' + this.cell,
             email: this.email,
             medication: this.bloodPressureMedication,

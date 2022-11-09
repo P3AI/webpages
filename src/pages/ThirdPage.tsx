@@ -87,7 +87,7 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                     setSelectAppleWatchModel(detail.checked)
                     setSelectFitbitModel(false)
                     setDeviceModel('')
-                    FormData.instance.deviceType = 'Apple'
+                    FormData.instance.deviceType = 'Apple Watch'
                 }}>Apple Watch</Checkbox>
                 {
                     selectAppleWatchModel &&
@@ -101,12 +101,12 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                                         FormData.instance.deviceModel = detail.value
                                     }}
                                     items={[
-                                        {value: 'series7', label: 'Series 7'},
-                                        {value: 'series6', label: 'Series 6'},
-                                        {value: 'series_se', label: 'Series SE'},
-                                        {value: 'series5', label: 'Series 5'},
-                                        {value: 'series4', label: 'Series 4'},
-                                        {value: 'series3-', label: 'Series 3 or below'}
+                                        {value: 'Series 7', label: 'Series 7'},
+                                        {value: 'Series 6', label: 'Series 6'},
+                                        {value: 'Series SE', label: 'Series SE'},
+                                        {value: 'Series 5', label: 'Series 5'},
+                                        {value: 'Series 4', label: 'Series 4'},
+                                        {value: 'Series 3 or below', label: 'Series 3 or below'}
                                     ]}
                         />
                     </SpaceBetween>
@@ -130,17 +130,17 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                                         FormData.instance.deviceModel = detail.value
                                     }}
                                     items={[
-                                        {value: 'inspire2', label: 'Inspire 2'},
-                                        {value: 'inspire3', label: 'Inspire 3'},
-                                        {value: 'charge4', label: 'Charge 4'},
-                                        {value: 'charge5', label: 'Charge 5'},
-                                        {value: 'sense', label: 'Sense'},
-                                        {value: 'sense2', label: 'Sense 2'},
-                                        {value: 'versa2', label: 'Versa 2'},
-                                        {value: 'versa3', label: 'Versa 3'},
-                                        {value: 'versa4', label: 'Versa 4'},
-                                        {value: 'luxe', label: 'Luxe'},
-                                        {value: 'other', label: 'Other'}
+                                        {value: 'Inspire 2', label: 'Inspire 2'},
+                                        {value: 'Inspire 3', label: 'Inspire 3'},
+                                        {value: 'Charge 4', label: 'Charge 4'},
+                                        {value: 'Charge 5', label: 'Charge 5'},
+                                        {value: 'Sense', label: 'Sense'},
+                                        {value: 'Sense 2', label: 'Sense 2'},
+                                        {value: 'Versa 2', label: 'Versa 2'},
+                                        {value: 'Versa 3', label: 'Versa 3'},
+                                        {value: 'Versa 4', label: 'Versa 4'},
+                                        {value: 'Luxe', label: 'Luxe'},
+                                        {value: 'Other', label: 'Other'}
                                     ]}
                         />
                     </SpaceBetween>
@@ -160,8 +160,8 @@ export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): 
                                 FormData.instance.bloodPressureMonitor = detail.value
                             }}
                             items={[
-                                {value: 'omron', label: 'Omron'},
-                                {value: 'ihealth', label: 'iHealth'}
+                                {value: 'Omron', label: 'Omron'},
+                                {value: 'iHealth', label: 'iHealth'}
                             ]} />
                 {
                     !(firstLoaded || bloodPressureMonitor.length > 0) && <p className='tip-text'>Please select your blood pressure monitor.</p>
