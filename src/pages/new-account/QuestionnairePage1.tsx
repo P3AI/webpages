@@ -1,8 +1,8 @@
-import {PagesEnum} from "../App";
+import {PagesEnum} from "../../App";
 import {Button, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
-import {CheckboxGroup, CheckboxGroupIsEmpty, CheckboxItem} from "../components/CheckboxGroup";
-import {DEBUG_MODE, FormData} from "../data/FormData";
+import {CheckboxGroup, CheckboxGroupIsEmpty, CheckboxItem} from "../../components/CheckboxGroup";
+import {DEBUG_MODE, FormData} from "../../data/FormData";
 
 export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 

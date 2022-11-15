@@ -1,7 +1,7 @@
-import {PagesEnum} from "../App";
+import {PagesEnum} from "../../App";
 import {Button, Checkbox, RadioGroup, SpaceBetween, Spinner} from "@cloudscape-design/components";
 import {useState} from "react";
-import {FormData} from "../data/FormData";
+import {FormData} from "../../data/FormData";
 
 export function QuestionnairePage2(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 

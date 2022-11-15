@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {CreateAccountEntryPage} from "./pages/CreateAccountEntryPage";
-import {QuestionnairePage1} from "./pages/QuestionnairePage1";
-import {QuestionnairePage2} from "./pages/QuestionnairePage2";
-import {CreateAccountSuccessPage} from "./pages/CreateAccountSuccessPage";
+import {CreateAccountEntryPage} from "./pages/new-account/CreateAccountEntryPage";
+import {QuestionnairePage1} from "./pages/new-account/QuestionnairePage1";
+import {QuestionnairePage2} from "./pages/new-account/QuestionnairePage2";
+import {CreateAccountSuccessPage} from "./pages/new-account/CreateAccountSuccessPage";
 
 export enum PagesEnum {
   First,
