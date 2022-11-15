@@ -3,7 +3,6 @@ import '../__pages.css'
 import React, {useEffect, useState} from "react";
 import {PasswordResetNewPasswordPage} from "./PasswordResetNewPasswordPage";
 import {PasswordResetSuccessPage} from "./PasswordResetSuccessPage";
-import cipraLogo from '../../res/cipra_logo.png'
 
 export enum PasswordResetPageEnum {
     Entry,
