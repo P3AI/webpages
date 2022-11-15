@@ -2,9 +2,9 @@ import {PagesEnum} from "../App";
 import {Button, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
 import {CheckboxGroup, CheckboxGroupIsEmpty, CheckboxItem} from "../components/CheckboxGroup";
-import {DEBUG_MODE, FormData} from "../FormData";
+import {DEBUG_MODE, FormData} from "../data/FormData";
 
-export function SecondPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
+export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
     const [firstName, setFirstName] = useState(FormData.instance.firstName)
     const [lastName, setLastName] = useState(FormData.instance.lastName)

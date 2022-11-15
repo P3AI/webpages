@@ -5,12 +5,12 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import cipraLogo from '../res/cipra_logo.png'
 import {useState} from "react";
-import {DEBUG_MODE, FormData} from "../FormData";
+import {DEBUG_MODE, FormData} from "../data/FormData";
 import {terms} from "../res/terms";
 
 const termAgreement: JSX.Element = terms
 
-export function FirstPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
+export function CreateAccountEntryPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
     const [emailValue, setEmailValue] = useState<string>(FormData.instance.email)
     const [phoneValue, setPhoneValue] = useState(FormData.instance.cell)
