@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
-import {CreateAccountEntryPage} from "./pages/new-account/CreateAccountEntryPage";
-import {QuestionnairePage1} from "./pages/new-account/QuestionnairePage1";
-import {QuestionnairePage2} from "./pages/new-account/QuestionnairePage2";
-import {CreateAccountSuccessPage} from "./pages/new-account/CreateAccountSuccessPage";
+import {CreateAccountEntryPage} from "./CreateAccountEntryPage";
+import {QuestionnairePage1} from "./QuestionnairePage1";
+import {QuestionnairePage2} from "./QuestionnairePage2";
+import {CreateAccountSuccessPage} from "./CreateAccountSuccessPage";
+import '../__pages.css'
 
 export enum PagesEnum {
   First,
@@ -12,7 +12,7 @@ export enum PagesEnum {
   Success
 }
 
-function App() {
+function ContainerNewAccount() {
 
   const [showPage, setShowPage] = useState<PagesEnum>(PagesEnum.First);
   const [showPageContent, setShowPageContent] = useState<JSX.Element>(<div/>);
@@ -41,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default ContainerNewAccount;

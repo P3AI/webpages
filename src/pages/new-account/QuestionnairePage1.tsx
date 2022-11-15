@@ -1,4 +1,4 @@
-import {PagesEnum} from "../../App";
+import {PagesEnum} from "./ContainerNewAccount";
 import {Button, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
 import {CheckboxGroup, CheckboxGroupIsEmpty, CheckboxItem} from "../../components/CheckboxGroup";

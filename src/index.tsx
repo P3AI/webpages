@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
     BrowserRouter,
     Route,
     Routes
 } from 'react-router-dom';
-import {PasswordResetEntryPage} from "./pages/password-reset/PasswordResetEntryPage";
+
+import ContainerNewAccount from './pages/new-account/ContainerNewAccount';
+import {ContainerPasswordReset} from "./pages/password-reset/ContainerPasswordReset";
 
 
 const root = ReactDOM.createRoot(
@@ -18,8 +19,8 @@ const root = ReactDOM.createRoot(
 root.render(
     <BrowserRouter basename={'/webpages'}>
         <Routes>
-            <Route path='/' element={<App/>}></Route>
-            <Route path='/reset-password' element={<PasswordResetEntryPage/>}></Route>
+            <Route path='/' element={<ContainerNewAccount/>}></Route>
+            <Route path='/reset-password' element={<ContainerPasswordReset/>}></Route>
         </Routes>
     </BrowserRouter>
 );
