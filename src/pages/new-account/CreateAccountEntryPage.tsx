@@ -1,5 +1,5 @@
 import {PagesEnum} from "./ContainerNewAccount";
-import {Button, Checkbox, Input, SpaceBetween, Textarea} from "@cloudscape-design/components";
+import {Button, Checkbox, Input, SpaceBetween} from "@cloudscape-design/components";
 import "../__pages.css"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
