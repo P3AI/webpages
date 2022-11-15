@@ -1,9 +1,9 @@
-import {PagesEnum} from "../App";
+import {PagesEnum} from "../../App";
 import {Button, Checkbox, RadioGroup, SpaceBetween, Spinner} from "@cloudscape-design/components";
 import {useState} from "react";
-import {FormData} from "../FormData";
+import {FormData} from "../../data/FormData";
 
-export function ThirdPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
+export function QuestionnairePage2(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
     const [takeBloodPressureMedicationValue, setTakeBloodPressureMedicationValue] = useState<string>(FormData.instance.bloodPressureMedication)
 

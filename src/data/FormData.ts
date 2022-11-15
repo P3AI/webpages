@@ -1,4 +1,4 @@
-import {CheckboxItem} from "./components/CheckboxGroup";
+import {CheckboxItem} from "../components/CheckboxGroup";
 // import axios from "axios";
 
 export const DEBUG_MODE = false

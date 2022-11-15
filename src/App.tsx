@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {FirstPage} from "./pages/FirstPage";
-import {SecondPage} from "./pages/SecondPage";
-import {ThirdPage} from "./pages/ThirdPage";
-import {SuccessPage} from "./pages/SuccessPage";
+import {CreateAccountEntryPage} from "./pages/new-account/CreateAccountEntryPage";
+import {QuestionnairePage1} from "./pages/new-account/QuestionnairePage1";
+import {QuestionnairePage2} from "./pages/new-account/QuestionnairePage2";
+import {CreateAccountSuccessPage} from "./pages/new-account/CreateAccountSuccessPage";
 
 export enum PagesEnum {
   First,
@@ -21,13 +21,13 @@ function App() {
     const getShowPage = (pageEnum: PagesEnum): JSX.Element => {
       switch (pageEnum){
         case PagesEnum.First:
-          return <FirstPage trigger={setShowPage}></FirstPage>
+          return <CreateAccountEntryPage trigger={setShowPage}></CreateAccountEntryPage>
         case PagesEnum.Second:
-          return <SecondPage trigger={setShowPage}></SecondPage>
+          return <QuestionnairePage1 trigger={setShowPage}></QuestionnairePage1>
         case PagesEnum.Third:
-          return <ThirdPage trigger={setShowPage}></ThirdPage>
+          return <QuestionnairePage2 trigger={setShowPage}></QuestionnairePage2>
         case PagesEnum.Success:
-          return <SuccessPage></SuccessPage>
+          return <CreateAccountSuccessPage></CreateAccountSuccessPage>
       }
       return <div></div>
     }
