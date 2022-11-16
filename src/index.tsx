@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {
-    BrowserRouter,
-    Route,
-    Routes
-} from 'react-router-dom';
+import {HashRouter, Route, Routes} from 'react-router-dom';
 
 import ContainerNewAccount from './pages/new-account/ContainerNewAccount';
 import {ContainerPasswordReset} from "./pages/password-reset/ContainerPasswordReset";
@@ -17,12 +13,14 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <BrowserRouter basename={'/webpages'}>
-        <Routes>
-            <Route path='/' element={<ContainerNewAccount/>}></Route>
-            <Route path='/reset-password' element={<ContainerPasswordReset/>}></Route>
-        </Routes>
-    </BrowserRouter>
+    <HashRouter>
+        <main>
+            <Routes>
+                <Route path='/reset-password' element={<ContainerPasswordReset/>}></Route>
+                <Route path='/' element={<ContainerNewAccount/>}></Route>
+            </Routes>
+        </main>
+    </HashRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
