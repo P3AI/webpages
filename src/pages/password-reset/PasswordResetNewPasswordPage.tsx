@@ -2,6 +2,7 @@ import {PasswordResetPageEnum} from "./ContainerPasswordReset";
 import {Button, Input, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
 import {ResetPasswordData} from "../../data/ResetPasswordData";
+import cipraLogo from "../../res/cipra_logo.png";
 
 export function PasswordResetNewPasswordPage(props: {trigger: (pageEnum: PasswordResetPageEnum) => void}): JSX.Element {
 
@@ -22,6 +23,7 @@ export function PasswordResetNewPasswordPage(props: {trigger: (pageEnum: Passwor
 
     return <div className='glow-border page-container page-width-constrain'>
         <SpaceBetween size='m' direction='vertical'>
+            <img src={cipraLogo} alt='cipra logo' width='90%' className='line-align-center'/>
             <h2 className='line-align-center'>Reset Password</h2>
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Password</div>
