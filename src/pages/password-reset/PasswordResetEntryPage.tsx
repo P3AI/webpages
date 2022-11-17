@@ -1,7 +1,7 @@
 import {PasswordResetPageEnum} from "./ContainerPasswordReset";
 import cipraLogo from "../../res/cipra_logo.png";
 import {Button, Input, SpaceBetween} from "@cloudscape-design/components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ResetPasswordData} from "../../data/ResetPasswordData";
 
 export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordResetPageEnum) => void}): JSX.Element {
@@ -22,6 +22,20 @@ export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordReset
         )
     }
 
+    useEffect(() => {
+
+        const enterKeyDown = (event: KeyboardEvent) => {
+            if(event.key !== 'Enter') return
+            submit()
+        }
+
+        document.addEventListener("keydown", enterKeyDown, false);
+
+        return () => {
+            document.removeEventListener("keydown", enterKeyDown, false);
+        };
+    }, [submit]);
+
     return <div className="glow-border page-container center-screen" style={{maxWidth: "330px"}}>
         <SpaceBetween size='m' direction='vertical'>
             <img src={cipraLogo} alt='cipra logo' width='90%' className='line-align-center'/>
@@ -35,7 +49,7 @@ export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordReset
                    placeholder="Email Address"
             ></Input>
             {
-                (emailTip.length !== 0) && <p className='tip-text'>{emailTip}</p>
+                (emailTip) && <p className='tip-text'>{emailTip}</p>
             }
             <div className='line-align-center'>
                 <Button variant='primary' onClick={submit}>
