@@ -7,13 +7,18 @@ import {ResetPasswordData} from "../../data/ResetPasswordData";
 export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordResetPageEnum) => void}): JSX.Element {
 
     const [emailValue, setEmailValue] = useState<string>(ResetPasswordData.instance.email)
-    const [emailTip, setEmailTip] = useState<string>('')
+    const [emailTip, setEmailTip] = useState<JSX.Element | undefined>(undefined)
 
     function submit(): void {
         ResetPasswordData.instance.email = emailValue
         ResetPasswordData.instance.emailExist(
             () => props.trigger(PasswordResetPageEnum.NewPassword),
-            () => setEmailTip("Cannot find account with email address " + emailValue)
+            () => setEmailTip(
+                <div>
+                    <p>Cannot find account with email address {emailValue}</p>
+                    <p>Please contact <a href='mailto: support@cipra.ai'>support@cipra.ai</a> for help</p>
+                </div>
+            )
         )
     }
 
