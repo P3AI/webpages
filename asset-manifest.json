@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/webpages/static/css/main.b4ae5b2a.css",
-    "main.js": "/webpages/static/js/main.83f5eb92.js",
+    "main.js": "/webpages/static/js/main.3a7e3906.js",
     "static/js/787.3928fff3.chunk.js": "/webpages/static/js/787.3928fff3.chunk.js",
     "static/media/cipra_logo.png": "/webpages/static/media/cipra_logo.ac930c1f66309f4bc12b.png",
     "index.html": "/webpages/index.html",
     "main.b4ae5b2a.css.map": "/webpages/static/css/main.b4ae5b2a.css.map",
-    "main.83f5eb92.js.map": "/webpages/static/js/main.83f5eb92.js.map",
+    "main.3a7e3906.js.map": "/webpages/static/js/main.3a7e3906.js.map",
     "787.3928fff3.chunk.js.map": "/webpages/static/js/787.3928fff3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b4ae5b2a.css",
-    "static/js/main.83f5eb92.js"
+    "static/js/main.3a7e3906.js"
   ]
 }
