@@ -18,7 +18,7 @@ export function CreateAccountEntryPage(props: {trigger: ((pagesEnum: PagesEnum) 
     const [confirmedPasswordValue, setConfirmedPasswordValue] = useState<string>(FormData.instance.password)
     const [policyCheckedValue, setPolicyCheckedValue] = useState<boolean>(false)
 
-    const [emailFormatValid, setEmailFormatValid] = useState<boolean>(true)
+    const [emailTip, setEmailTip] = useState<string | undefined>('')
     const [passwordNotEmptyValid, setPasswordNotEmptyValid] = useState<boolean>(true)
     const [passwordConfirmValid, setPasswordConfirmValid] = useState<boolean>(true)
     const [termAgreed, setTermAgreed] = useState<boolean>(true)
@@ -31,16 +31,33 @@ export function CreateAccountEntryPage(props: {trigger: ((pagesEnum: PagesEnum) 
         const checkPasswordConfirmValid = passwordValue === confirmedPasswordValue
         const checkedTermAgreed = policyCheckedValue
 
-        setEmailFormatValid(checkEmailFormatValid)
         setPasswordNotEmptyValid(checkPasswordNotEmptyValid)
         setPasswordConfirmValid(checkPasswordConfirmValid)
         setTermAgreed(checkedTermAgreed)
-
-        if(DEBUG_MODE || (checkEmailFormatValid && checkPasswordConfirmValid && checkedTermAgreed)) {
-            FormData.instance.email = emailValue
-            FormData.instance.cell = phoneValue
-            FormData.instance.password = passwordValue
-            props.trigger(PagesEnum.Second)
+        if(!checkEmailFormatValid) {
+            setEmailTip('Email format is not correct.')
+        }
+        else {
+            setEmailTip(undefined)
+            fetch('https://mesdata.ucsd.edu:5001/emailexists/' + emailValue)
+                .then((response) => {
+                    if(response.ok) {
+                        //email exists
+                        setEmailTip('The email address has been registered.')
+                    }
+                    else{
+                        //email not exists
+                        if(DEBUG_MODE || (checkEmailFormatValid && checkPasswordConfirmValid && checkedTermAgreed)) {
+                            FormData.instance.email = emailValue
+                            FormData.instance.cell = phoneValue
+                            FormData.instance.password = passwordValue
+                            props.trigger(PagesEnum.Second)
+                        }
+                    }
+                })
+                .catch((err) => {
+                    console.log('Network Error', err)
+                })
         }
     }
 
@@ -57,7 +74,7 @@ export function CreateAccountEntryPage(props: {trigger: ((pagesEnum: PagesEnum) 
                    placeholder="Email Address"
             ></Input>
             {
-                !emailFormatValid && <p className='tip-text'>Email format is not correct.</p>
+                (emailTip) && <p className='tip-text'>{emailTip}</p>
             }
             <SpaceBetween size='m' direction='horizontal'>
                 <div>Cell</div>
