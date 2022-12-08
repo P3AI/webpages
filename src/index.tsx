@@ -15,8 +15,8 @@ const root = ReactDOM.createRoot(
 root.render(
     <BrowserRouter>
         <Routes>
-            <Route path='/resetPassword' element={<ContainerPasswordReset/>}></Route>
             <Route path='/' element={<ContainerNewAccount/>}></Route>
+            <Route path='resetPassword' element={<ContainerPasswordReset/>}></Route>
         </Routes>
     </BrowserRouter>
 );
