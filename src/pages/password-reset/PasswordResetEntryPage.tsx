@@ -1,7 +1,7 @@
 import {PasswordResetPageEnum} from "./ContainerPasswordReset";
 import cipraLogo from "../../res/cipra_logo.png";
 import {Button, Input, SpaceBetween} from "@cloudscape-design/components";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import {ResetPasswordData} from "../../data/ResetPasswordData";
 
 export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordResetPageEnum) => void}): JSX.Element {
@@ -9,7 +9,7 @@ export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordReset
     const [emailValue, setEmailValue] = useState<string>(ResetPasswordData.instance.email)
     const [emailTip, setEmailTip] = useState<JSX.Element | undefined>(undefined)
 
-    function submit(): void {
+    const submit = useCallback((): void => {
         ResetPasswordData.instance.email = emailValue
         ResetPasswordData.instance.emailExist(
             () => props.trigger(PasswordResetPageEnum.NewPassword),
@@ -20,7 +20,7 @@ export function PasswordResetEntryPage(props: {trigger: (pageEnum: PasswordReset
                 </div>
             )
         )
-    }
+    }, [emailValue, props])
 
     useEffect(() => {
 
