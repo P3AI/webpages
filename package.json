@@ -2,7 +2,6 @@
   "name": "webpages",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://p3ai.github.io/webpages",
   "dependencies": {
     "@cloudscape-design/components": "^3.0.99",
     "@cloudscape-design/global-styles": "^1.0.1",
