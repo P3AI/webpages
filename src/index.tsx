@@ -14,12 +14,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <BrowserRouter>
-        <main>
-            <Routes>
-                <Route path='/' element={<ContainerNewAccount/>}></Route>
-                <Route path='/reset-password' element={<ContainerPasswordReset/>}></Route>
-            </Routes>
-        </main>
+        <Routes>
+            <Route path='/' element={<ContainerNewAccount/>}></Route>
+            <Route path='/reset-password' element={<ContainerPasswordReset/>}></Route>
+        </Routes>
     </BrowserRouter>
 );
 
