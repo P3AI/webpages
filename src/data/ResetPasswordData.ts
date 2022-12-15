@@ -1,16 +1,16 @@
 export class ResetPasswordData {
     static instance: ResetPasswordData = new ResetPasswordData()
 
-    email: string = ''
-    password: string = ''
-
+    EndpointEmailExist = 'https://mesdata.ucsd.edu:5001/emailexists/'
+    EndpointSendEmail = 'https://mesdata.ucsd.edu:5001/sendresetpasswordurl?email=' // parameter email
     EndpointResetPassword = 'https://mesdata.ucsd.edu:5001/resetpassword'
 
     emailExist(
+        emailAddress: string,
         whenExist: () => void,
         whenNotExist: () => void
     ): void {
-        const url = 'https://mesdata.ucsd.edu:5001/emailexists/' + this.email
+        const url = this.EndpointEmailExist + emailAddress;
         fetch(url)
             .then(response => {
                 if(response.ok) {
@@ -25,10 +25,30 @@ export class ResetPasswordData {
             })
     }
 
-    submit(callbackSuccess: () => void, callbackFail: () => void): void {
+    sendEmail(
+        emailAddress: string,
+        whenSuccess: () => void,
+        whenFailed: () => void
+    ): void {
+        const url = this.EndpointSendEmail + emailAddress;
+        fetch(url)
+            .then(response => {
+                if(response.ok){
+                    whenSuccess()
+                } else {
+                    whenFailed()
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                whenFailed();
+            })
+    }
+
+    submit(emailAddress: string, password: string, callbackSuccess: () => void, callbackFail: () => void): void {
         const submitData = {
-            email: this.email,
-            password: this.password
+            email: emailAddress,
+            password: password
         }
         fetch(this.EndpointResetPassword, {
             method: 'POST',
@@ -45,5 +65,6 @@ export class ResetPasswordData {
                 console.log('Network Issue: ' + e)
                 callbackFail()
             })
+        console.log("submitted", submitData)
     }
 }
