@@ -5,7 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import ContainerNewAccount from './pages/new-account/ContainerNewAccount';
-import {ContainerPasswordReset} from "./pages/password-reset/ContainerPasswordReset";
+import {ForgetPasswordPage} from "./pages/password-reset/ForgetPasswordPage";
+import {PasswordResetNewPasswordPage} from "./pages/password-reset/PasswordResetNewPasswordPage";
 
 
 const root = ReactDOM.createRoot(
@@ -15,8 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <BrowserRouter>
         <Routes>
-            <Route path='/' element={<ContainerNewAccount/>}></Route>
-            <Route path='/resetPassword' element={<ContainerPasswordReset/>}></Route>
+            <Route path='/' element={<ContainerNewAccount />}></Route>
+            <Route path='/resetPassword/:email' element={<PasswordResetNewPasswordPage />}></Route>
+            <Route path='/forgetPassword' element={<ForgetPasswordPage />}></Route>
         </Routes>
     </BrowserRouter>
 );
