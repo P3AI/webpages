@@ -6,6 +6,7 @@ import {DEBUG_MODE, FormData} from "../../data/FormData";
 
 export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
+    const [provider, setProvider] = useState(FormData.instance.provider)
     const [firstName, setFirstName] = useState(FormData.instance.firstName)
     const [lastName, setLastName] = useState(FormData.instance.lastName)
     const [genderValue, setGenderValue] = useState(FormData.instance.gender)
@@ -31,6 +32,26 @@ export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => v
         <SpaceBetween size='xl' direction='vertical'>
 
             <h2 className='line-align-center'>Create an account</h2>
+
+            <SpaceBetween size='s' direction='vertical'>
+                <SpaceBetween size='m' direction='horizontal'>
+                    <div>Where did you hear about us?</div>
+                </SpaceBetween>
+                <RadioGroup
+                    onChange={({ detail }) => {
+                        setProvider(detail.value)
+                        FormData.instance.provider = detail.value
+                    }}
+                    value={provider}
+                    items={[
+                        { value: "Facebook", label: "Facebook" },
+                        { value: "Reddit", label: "Reddit" },
+                    ]}
+                />
+                {
+                    !(firstLoaded || provider.length > 0) && <p className='tip-text'>Please select where did you hear about us.</p>
+                }
+            </SpaceBetween>
 
             <SpaceBetween size='s' direction='vertical'>
                 <SpaceBetween size='m' direction='horizontal'>
