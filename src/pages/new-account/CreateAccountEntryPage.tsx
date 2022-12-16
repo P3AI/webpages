@@ -13,7 +13,7 @@ const termAgreement: JSX.Element = terms
 export function CreateAccountEntryPage(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
     const [emailValue, setEmailValue] = useState<string>(FormData.instance.email)
-    const [phoneValue, setPhoneValue] = useState(FormData.instance.cell)
+    const [phoneValue, setPhoneValue] = useState<string>(FormData.instance.cell)
     const [passwordValue, setPasswordValue] = useState<string>(FormData.instance.password)
     const [confirmedPasswordValue, setConfirmedPasswordValue] = useState<string>(FormData.instance.password)
     const [policyCheckedValue, setPolicyCheckedValue] = useState<boolean>(false)

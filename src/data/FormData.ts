@@ -21,6 +21,7 @@ export class FormData {
     cell: string = '';
     password: string = '';
 
+    provider: string = '';
     firstName: string = '';
     lastName: string = '';
     gender: string = '';
@@ -39,6 +40,7 @@ export class FormData {
 
     submit(callbackSuccess: () => void, callbackFail: () => void): void {
         const submitData = {
+            provider: this.provider,
             first_name: this.firstName,
             last_name: this.lastName,
             password: this.password,
