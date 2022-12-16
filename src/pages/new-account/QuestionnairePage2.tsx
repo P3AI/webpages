@@ -23,7 +23,7 @@ export function QuestionnairePage2(props: {trigger: ((pagesEnum: PagesEnum) => v
 
     function submit() {
         setFirstLoaded(false)
-        if(takeBloodPressureMedicationValue.length > 0 && phoneModel.length > 0) {
+        if(takeBloodPressureMedicationValue.length > 0 && phoneModel.length > 0 && bloodPressureMonitor.length > 0 && deviceModel.length > 0) {
             setSubmitWaiting(true)
             const whenSuccess = (): void => {
                 props.trigger(PagesEnum.Success)
@@ -85,9 +85,15 @@ export function QuestionnairePage2(props: {trigger: ((pagesEnum: PagesEnum) => v
                 </SpaceBetween>
                 <Checkbox checked={selectAppleWatchModel} onChange={({detail}) => {
                     setSelectAppleWatchModel(detail.checked)
-                    setSelectFitbitModel(false)
-                    setDeviceModel('')
-                    FormData.instance.deviceType = 'Apple Watch'
+                    if(detail.checked) {
+                        setSelectFitbitModel(false)
+                        setDeviceModel('')
+                        FormData.instance.deviceType = 'Apple Watch'
+                    } else {
+                        setSelectAppleWatchModel(false)
+                        setDeviceModel('')
+                        FormData.instance.deviceType = ''
+                    }
                 }}>Apple Watch</Checkbox>
                 {
                     selectAppleWatchModel &&
@@ -113,9 +119,14 @@ export function QuestionnairePage2(props: {trigger: ((pagesEnum: PagesEnum) => v
                 }
                 <Checkbox checked={selectFitbitModel} onChange={({detail}) => {
                     setSelectFitbitModel(detail.checked)
-                    setSelectAppleWatchModel(false)
                     setDeviceModel('')
-                    FormData.instance.deviceType = 'Fitbit'
+                    if(detail.checked) {
+                        setSelectAppleWatchModel(false)
+                        FormData.instance.deviceType = 'Fitbit'
+                    } else {
+                        setSelectFitbitModel(false)
+                        FormData.instance.deviceType = ''
+                    }
                 }}>Fitbit</Checkbox>
                 {
                     selectFitbitModel &&
@@ -123,7 +134,6 @@ export function QuestionnairePage2(props: {trigger: ((pagesEnum: PagesEnum) => v
                         <SpaceBetween size='m' direction='horizontal'>
                             <div>What is your Fitbit model?</div>
                         </SpaceBetween>
-
                         <RadioGroup value={deviceModel}
                                     onChange={({detail}) => {
                                         setDeviceModel(detail.value)
