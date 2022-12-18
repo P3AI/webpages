@@ -2,7 +2,7 @@ import {PagesEnum} from "./ContainerNewAccount";
 import {Button, Input, RadioGroup, SpaceBetween} from "@cloudscape-design/components";
 import {useState} from "react";
 import {CheckboxGroup, CheckboxGroupIsEmpty, CheckboxItem} from "../../components/CheckboxGroup";
-import {DEBUG_MODE, FormData} from "../../data/FormData";
+import {FormData} from "../../data/FormData";
 
 export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => void) }): JSX.Element {
 
@@ -21,7 +21,7 @@ export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => v
 
     function submit(): void {
         setFirstLoaded(false)
-        if(DEBUG_MODE || (firstName.length > 0 && lastName.length > 0 && genderValue.length > 0 && ageValue.length > 0
+        if(provider.length > 0 && (firstName.length > 0 && lastName.length > 0 && genderValue.length > 0 && ageValue.length > 0
             && heightFeetValue.length > 0 && heightInchesValue.length > 0 && zipCodeValue.length > 0 && !CheckboxGroupIsEmpty(preexistingConditionsValue)))
         {
             props.trigger(PagesEnum.Third)
@@ -46,6 +46,7 @@ export function QuestionnairePage1(props: {trigger: ((pagesEnum: PagesEnum) => v
                     items={[
                         { value: "Facebook", label: "Facebook" },
                         { value: "Reddit", label: "Reddit" },
+                        { value: "Other", label: "Other" }
                     ]}
                 />
                 {
